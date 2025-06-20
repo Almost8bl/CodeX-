@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CodeX | Technical Support </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        'light-beige': '#FDFBF5',
+                        'sky-blue': {
+                            'DEFAULT': '#38bdf8', // light sky blue
+                            'dark': '#0ea5e9',   // darker for hover
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* To apply the font globally */
+        body {
+            font-family: 'cairo', sans-serif;
+            background-color: #FDFBF5; /* Light beige color */
+            color: #1a1a1a; /* Black text color */
+            scroll-behavior: smooth;
+        }
+        /* A subtle background pattern for a richer feel */
+        .hero-section {
+            background-color: #FDFBF5;
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.04) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+
+
+        /* --- CSS Variables (for easy color control) --- */
+        :root {
+            --primary-color: #0a7ea4;
+            --secondary-color: #08617f;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-color: #343a40;
+            --footer-bg-color: #111315;
+            --footer-text-color: #a0a0a0;
+            --light-gray-color: #e9ecef;
+            --bot-message-bg: #e9ecef;
+            --user-message-bg: #0a7ea4;
+            --user-message-color: #ffffff;
+            --header-font-size: 2.5rem;
+            --section-font-size: 1.8rem;
+            --base-font-size: 1rem;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        }
+
+        /* --- Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Body updated to use Cairo font and Tailwind colors */
+        body {
+            font-family: 'cairo', sans-serif; /* Use font defined in Tailwind */
+            background-color: var(--background-color); /* Can be overridden if Tailwind is primary controller */
+            color: var(--text-color); /* Can be overridden if Tailwind is primary controller */
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        main {
+            flex-grow: 1;
+        }
+
+        /* --- Logo --- */
+        .codex-logo svg { width: 120px; height: 40px; }
+        .codex-logo text { font-family: 'Cairo', sans-serif; font-size: 40px; font-weight: 700; fill: var(--text-color); }
+        .codex-logo-small svg { width: 90px; height: 30px; }
+        .codex-logo-small text { font-family: 'Cairo', sans-serif; font-size: 40px; font-weight: 700; fill: var(--primary-color); }
+
+        /* --- Main Container --- */
+        .support-container { max-width: 900px; margin: 60px auto; padding: 0 20px; }
+
+        /* --- Header Section (Old - now removed, these styles are for the content inside main) --- */
+        /* .header-section { text-align: center; margin-bottom: 60px; } */
+        /* .header-section h1 { font-size: var(--header-font-size); color: var(--text-color); margin-bottom: 10px; font-weight: 700; } */
+        /* .header-section p { font-size: 1.1rem; color: #6c757d; max-width: 600px; margin: 0 auto; } */
+
+        /* --- FAQ Section --- */
+        .faq-section { background-color: var(--card-background); padding: 40px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+        .faq-section h2 { font-size: var(--section-font-size); margin-bottom: 30px; text-align: center; }
+        .faq-item { border-bottom: 1px solid var(--light-gray-color); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question { width: 100%; background: none; border: none; text-align: right; padding: 20px 0; font-family: 'Cairo', sans-serif; font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-color); transition: color 0.3s ease; }
+        .faq-question:hover { color: var(--primary-color); }
+        .faq-question::after { content: '\002B'; font-size: 1.2em; color: var(--primary-color); transition: transform 0.3s ease-in-out; margin-left: 15px; }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, padding 0.4s ease; color: #555; font-size: var(--base-font-size); padding: 0 20px; }
+        .faq-item.active .faq-answer { max-height: 300px; padding: 0px 20px 20px 20px; }
+
+        /* --- Chatbot --- */
+        .chat-toggle { position: fixed; bottom: 85px; left: 30px; width: 60px; height: 60px; background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); color: white; border-radius: 50%; border: none; display: flex; justify-content: center; align-items: center; font-size: 24px; cursor: pointer; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); z-index: 1000; transition: transform 0.3s ease; }
+        .chat-toggle:hover { transform: scale(1.1); }
+        .chat-toggle svg { width: 32px; height: 32px; fill: white; }
+        .chat-widget { position: fixed; bottom: 155px; left: 30px; width: 370px; max-width: 90vw; height: 70vh; max-height: 600px; background-color: var(--card-background); border-radius: var(--border-radius); box-shadow: var(--box-shadow); display: flex; flex-direction: column; overflow: hidden; z-index: 999; transform-origin: bottom left; transform: scale(0); opacity: 0; transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        .chat-widget.open { transform: scale(1); opacity: 1; }
+        .chat-header { padding: 15px 20px; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); color: white; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--light-gray-color); }
+        .chat-header .header-content { display: flex; align-items: center; gap: 10px; }
+        .chat-header h3 { margin: 0; font-size: 1.1rem; }
+        .chat-header .codex-logo-small svg text { fill: white; }
+        .chat-close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+        .chat-body { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .chat-message { padding: 10px 15px; border-radius: 18px; max-width: 80%; line-height: 1.5; animation: fadeIn 0.3s ease; }
+        .bot-message { background-color: var(--bot-message-bg); color: var(--text-color); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .user-message { background-color: var(--user-message-bg); color: var(--user-message-color); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .typing-indicator { display: flex; align-items: center; padding: 10px 15px; }
+        .typing-indicator span { height: 8px; width: 8px; margin: 0 2px; background-color: #aaa; border-radius: 50%; display: inline-block; animation: bounce 1.4s infinite ease-in-out both; }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+
+        /* --- Chat Input Form --- */
+        #chat-input-form { display: flex; padding: 15px; border-top: 1px solid var(--light-gray-color); gap: 10px; }
+        #user-input { flex-grow: 1; border: 1px solid var(--light-gray-color); border-radius: 8px; padding: 10px; font-family: 'Cairo', sans-serif; font-size: 0.9rem; transition: border-color 0.3s ease; }
+        #user-input:focus { outline: none; border-color: var(--primary-color); }
+        #chat-input-form button { background-color: var(--primary-color); color: white; border: none; border-radius: 8px; padding: 10px 15px; font-family: 'Cairo', sans-serif; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease; }
+        #chat-input-form button:hover { background-color: var(--secondary-color); }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Footer (Old - most styles for the footer are now handled by Tailwind in the new footer) --- */
+        /* footer { background-color: var(--footer-bg-color); color: var(--footer-text-color); padding: 25px 0; font-size: 0.9rem; } */
+        /* .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; } */
+        /* .footer-quote { flex-basis: 300px; text-align: right; } */
+        /* .footer-copyright { flex-basis: 300px; text-align: left; } */
+        /* .social-icons { display: flex; gap: 25px; justify-content: center; flex-grow: 1; } */
+        /* .social-icons a { color: var(--footer-text-color); transition: color 0.3s ease; } */
+        /* .social-icons a:hover { color: #ffffff; } */
+        /* .social-icons svg { width: 22px; height: 22px; fill: currentColor; } */
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            :root { --header-font-size: 2rem; --section-font-size: 1.5rem; }
+            .faq-section { padding: 20px; }
+            .chat-widget { left: 10px; right: 10px; bottom: 145px; width: auto; }
+            .chat-toggle { left: 20px; bottom: 80px; }
+            /* .footer-container { flex-direction: column; gap: 25px; } */
+            /* .footer-quote, .footer-copyright, .social-icons { flex-basis: auto; width: 100%; text-align: center; } */
+            /* .social-icons { order: -1; } */
+        }
+
+        /* New Header Animation CSS */
+        @keyframes fade-in-down {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-down {
+            animation: fade-in-down 0.6s ease-out both;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-light-beige/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 transition-all duration-300 ease-in-out" id="main-header">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center animate-fade-in-down">
+            <a href="index.html" class="relative text-2xl font-bold text-gray-800 transition-transform duration-300 hover:scale-105 group">
+                Codex
+                <span class="absolute -bottom-1 left-0 w-0 h-1 bg-sky-400 group-hover:w-full transition-all duration-500 rounded-full"></span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">Home</a>
+                <a href="shop.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">Products</a>
+                <a href="about.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">About Us</a>
+                <a href="contact.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">Contact Us</a>
+            </nav>
+
+            <a href="support.html" class="hidden md:block bg-sky-blue text-white font-bold py-2 px-5 rounded-lg shadow-md hover:bg-sky-blue-dark transition-all duration-300 hover:scale-105 hover:shadow-lg hover:animate-pulse">
+                Support
+            </a>
+
+            <button class="md:hidden text-gray-700 focus:outline-none transition-transform duration-300 hover:rotate-90">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="support-container">
+        <section class="header-section">
+             <div class="codex-logo">
+                 <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+                     <text x="0" y="30">Codex</text>
+                 </svg>
+             </div>
+<h1 class="text-4xl font-bold text-gray-900">Your Gateway to Smart Codex Solutions</h1>
+<p class="mt-4 text-lg text-gray-800 leading-relaxed font-medium">
+    <span class="block text-xl font-bold text-blue-800 mb-2">Welcome to Codex Advanced Support Center</span>
+    <span class="block mb-3">
+        Where cutting-edge technology meets top-tier professionalism. We don’t just offer support — we deliver a refined experience built on speed, accuracy, and a deep understanding of your needs.
+        <br><br>
+        💡 Powered by an <strong class="text-blue-700">advanced AI assistant</strong>, our platform is designed to provide intelligent, real-time help — faster, smarter, and more precise than ever.
+    </span>
+    <span class="block italic text-gray-600 mt-2">
+        If we impressed you, share it. If we didn't, let us know.
+    </span>
+</p>
+
+
+        </section>
+
+        <section class="faq-section">
+<h2 class="text-2xl font-bold text-gray-800 mb-4">Frequently Asked Questions from Our Clients</h2>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">How can I pay?</button>
+                    <div class="faq-answer">
+                        <p>We offer multiple payment methods to make it easy for you. You can pay via credit cards (Visa, MasterCard), direct bank transfers, or through secure electronic payment gateways like PayPal and Stripe.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">What features do you offer?</button>
+                    <div class="faq-answer">
+                        <p>At Codex, we specialize in providing integrated software solutions that include: custom design and development, 24/7 technical support, robust and scalable infrastructure, in addition to user-friendly control panels that give you full control over your project.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Is there a warranty on the service?</button>
+                    <div class="faq-answer">
+                        <p>Absolutely. All our projects come with a warranty period and free technical support after delivery to ensure everything runs efficiently. The warranty duration varies depending on the size and nature of the project and is clearly defined in the agreement contract.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">How can I join the programming team?</button>
+                    <div class="faq-answer">
+<p>To join our team, please reach out through our official Discord server. We're looking for passionate and talented individuals who share our vision.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">How long does it take to implement a project?</button>
+                    <div class="faq-answer">
+                        <p>The time required depends on the size and complexity of the project. After an initial consultation session to fully understand your requirements, we will provide a detailed timeline. Small projects may take a few weeks, while larger projects may extend over several months.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="chat-toggle" id="chat-toggle-btn" aria-label="Open chat">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    </button>
+
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header">
+            <div class="header-content">
+               <div class="codex-logo-small">
+                    <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+                        <text x="0" y="30">Codex</text>
+                    </svg>
+                </div>
+                <h3>Smart Support</h3>
+            </div>
+            <button class="chat-close-btn" id="chat-close-btn" aria-label="Close chat">&times;</button>
+        </div>
+        <div class="chat-body" id="chat-body">
+                <div class="chat-message bot-message">
+                Welcome to Codex Smart Support! How can I assist you today?
+            </div>
+        </div>
+        <form id="chat-input-form">
+            <input type="text" id="user-input" placeholder="Ask your question here..." autocomplete="off" required>
+            <button type="submit" aria-label="Send">Send</button>
+        </form>
+    </div>
+
+    <footer class="bg-gray-950 text-white border-t border-gray-800">
+        <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+            
+            <div class="text-sm text-gray-400">
+                We at <span class="font-semibold text-white">Codex</span> believe that technology should be simple and stunning at the same time.
+            </div>
+
+            <div class="flex justify-center md:justify-center space-x-6">
+<a href="https://www.youtube.com/@CodeX-dev-eazy" class="hover:text-red-600 transition" aria-label="YouTube" target="_blank">
+    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+        <path d="M23.498 6.186a2.93 2.93 0 0 0-2.057-2.066C19.57 3.5 12 3.5 12 3.5s-7.57 0-9.441.62A2.93 2.93 0 0 0 .502 6.186C0 8.066 0 12 0 12s0 3.934.502 5.814a2.93 2.93 0 0 0 2.057 2.066C4.43 20.5 12 20.5 12 20.5s7.57 0 9.441-.62a2.93 2.93 0 0 0 2.057-2.066C24 15.934 24 12 24 12s0-3.934-.502-5.814zM9.75 15.018V8.982L15.545 12 9.75 15.018z"/>
+    </svg>
+</a>
+
+<a href="https://discord.gg/QQAEpsnKZF" class="hover:text-indigo-500 transition" aria-label="Discord" target="_blank">
+    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+        <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.078.037c-.211.375-.444.864-.608 1.249a18.365 18.365 0 00-5.493 0 12.06 12.06 0 00-.617-1.249.077.077 0 00-.078-.037 19.736 19.736 0 00-4.885 1.515.07.07 0 00-.033.027C.533 9.045-.32 13.579.099 18.057a.082.082 0 00.031.056 19.9 19.9 0 005.993 3.058.077.077 0 00.084-.027c.46-.63.873-1.295 1.226-1.989a.076.076 0 00-.041-.106 13.276 13.276 0 01-1.886-.902.077.077 0 01-.008-.127c.126-.094.252-.192.374-.291a.074.074 0 01.077-.01c3.928 1.795 8.18 1.795 12.061 0a.073.073 0 01.078.009c.123.099.248.198.375.292a.076.076 0 01-.006.127 12.387 12.387 0 01-1.887.901.076.076 0 00-.04.107c.36.693.773 1.358 1.225 1.988a.075.075 0 00.084.028 19.87 19.87 0 006.002-3.057.078.078 0 00.03-.057c.5-5.177-.838-9.673-3.548-13.66a.062.062 0 00-.03-.027zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.094 2.157 2.418 0 1.334-.955 2.419-2.157 2.419zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.094 2.157 2.418 0 1.334-.947 2.419-2.157 2.419z"/>
+    </svg>
+</a>
+
+
+
+<a href="https://x.com/CodeXdeveazy" class="text-white hover:text-gray-300 transition" aria-label="X" target="_blank">
+    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+        <path d="M21.543 3H17.7l-5.3 6.867L6.257 3H2l7.617 10.066L2 21h3.843l5.57-7.207L17.7 21H22l-7.905-10.34L21.543 3z"/>
+    </svg>
+</a>
+
+
+
+            </div>
+
+            <div class="text-sm text-gray-500">
+                All Rights Reserved © Codex 2025
+            </div>
+
+        </div>
+    </footer>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // --- FAQ Accordion Logic ---
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const currentlyActive = document.querySelector('.faq-item.active');
+                if (currentlyActive && currentlyActive !== item) {
+                    currentlyActive.classList.remove('active');
+                }
+                item.classList.toggle('active');
+            });
+        });
+
+        // --- Chatbot "AI" Logic ---
+        const chatToggleBtn = document.getElementById('chat-toggle-btn');
+        const chatCloseBtn = document.getElementById('chat-close-btn');
+        const chatWidget = document.getElementById('chat-widget');
+        const chatBody = document.getElementById('chat-body');
+        const chatInputForm = document.getElementById('chat-input-form');
+        const userInputField = document.getElementById('user-input');
+        // const chatSuggestions = document.getElementById('chat-suggestions'); // Removed as suggestions logic is not in focus now
+
+        // --- "AI" Knowledge Base ---
+        const knowledgeBase = [
+            // --- Greetings and Farewells ---
+            {
+                topic: 'greeting',
+                keywords: ['hello', 'hi', 'greetings', 'how are you', 'good morning', 'good evening', 'hey'],
+                patterns: [
+                    /(hello|hi|greetings|hey)\s*(!|\.)*$/i,
+                    /(how are you|how's it going|what's up)\s*(\?)*$/i,
+                    /(good morning|good evening|good night)\s*(!|\.)*$/i
+                ],
+                getResponse: () => {
+                    const responses = [
+                        'Welcome to Codex support. How can I assist you today?',
+                        'Hello! I am your virtual assistant from Codex. What is your inquiry?',
+                        'Hey there! We are happy you contacted Codex support center. How can we help you today?'
+                    ];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            },
+            {
+                topic: 'thanks',
+                keywords: ['thank you', 'thanks', 'appreciate', 'much obliged', 'many thanks', 'grateful'],
+                patterns: [
+                    /(thank you|thanks)\s*(very much)*(!|\.)*$/i,
+                    /(I appreciate it|much obliged|many thanks)\s*(!|\.)*$/i
+                ],
+                getResponse: () => {
+                    const responses = [
+                        'You\'re welcome! I am happy to help. Do you have any other questions?',
+                        'My pleasure! Feel free to ask more questions.',
+                        'We are always here to help you. Is there anything else I can assist you with?'
+                    ];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            },
+            {
+                topic: 'farewell',
+                keywords: ['goodbye', 'bye', 'see you', 'farewell', 'talk to you later'],
+                patterns: [
+                    /(goodbye|bye|farewell)\s*(!|\.)*$/i,
+                    /(see you later|talk to you later)\s*(!|\.)*$/i
+                ],
+                getResponse: () => {
+                    const responses = [
+                        'Goodbye! We wish you a good day.',
+                        'See you later! Feel free to contact us again if you need assistance.',
+                        'Farewell! Thank you for contacting Codex.'
+                    ];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            },
+
+            // --- Payment and Pricing (accurate information provided by you) ---
+            {
+                topic: 'payment_methods',
+                keywords: ['pay', 'payment', 'card', 'visa', 'mastercard', 'paypal', 'stripe', 'payment methods', 'how to pay', 'cost', 'vodafone cash', 'discord credit'],
+                patterns: [
+                    /(what are|what is|how|payment) (methods|to pay|available|do you have)/i,
+                    /do you accept (visa|mastercard|paypal|credit cards|vodafone cash|discord credit)/i,
+                    /(I want to|I need to) (pay|settle|checkout)/i,
+                    /how (can I|do I) pay/i
+                ],
+                getResponse: () => {
+                    const responses = [
+                        'We offer various payment methods to facilitate your transactions, including Vodafone Cash, PayPal, and Discord credit. All payments are secure and reliable.',
+                        'You can pay us using Vodafone Cash, PayPal, or Discord credit. We strive to provide flexible options for our customers.',
+                        'We have several payment options to suit your needs: Vodafone Cash, PayPal, and Discord credit. Which method do you prefer?'
+                    ];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            },
+            {
+                topic: 'project_cost_estimate',
+                keywords: ['cost', 'price', 'how much', 'whats the price', 'whats the cost', 'packages', 'plans', 'project price', 'quote', 'value'],
+                patterns: [
+                    /(how much does|what is the cost of) (the project|the service|the product)\s*(\?)*$/i,
+                    /(I want to know|details about) prices\s*(!|\.)*$/i,
+                    /do you have (packages|pricing plans|offers)/i,
+                    /how do I get a (detailed)* quote\s*(\?)*$/i
+                ],
+                getResponse: () => {
+                    const responses = [
+                        'Our prices depend on the scope and complexity of the project. To get an accurate cost estimate, please provide us with details of your requirements, and our team will prepare a customized quote for you.',
+                        'We do not have fixed price packages, as each project is unique. We determine the cost based on technical and time requirements. We can provide a detailed quote after discussing your needs.',
+                        'We can provide you with a detailed quote after a full understanding of your project. The cost varies depending on the amount of work and the technologies used.'
+                    ];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            },
+
+            // --- Company Features and Services (accurate information provided by you) ---
+            {
+                topic: 'core_services',
+                keywords: ['features', 'services', 'offer', 'property', 'what do you do', 'areas of work', 'solutions', 'we offer', 'what do you offer', 'your products', 'development', 'web development', 'discord bots', 'mobile apps', 'cybersecurity networks'],
+                patterns: [
+                    /(what are|what is) your (services|features|solutions you offer)\s*(\?)*$/i,
+                    /(what do you do|what is your field of work|what is your specialty)\s*(\?)*$/i,
+                    /do you (develop|design) (websites|applications|discord bots|cybersecurity networks)\s*(\?)*$/i,
+                    /do you support (website building|discord bots|mobile applications|cybersecurity networks)/i
+                ],
+                getResponse: () => {
+                    const responses = [
+                        'At Codex, we specialize in building websites, Discord bots, mobile applications, and developing advanced cybersecurity networks. We provide integrated software solutions that meet your needs.',
+                        'Our services at Codex include website design and development, building custom Discord bots, creating smart mobile applications, and providing advanced cybersecurity solutions to protect your data.',
+                        'At Codex, we offer a wide range of advanced software services: professional website building, Discord bot development, mobile application design, and securing your networks with modern cybersecurity solutions.'
+                    ];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            },
+            {
+                topic: 'custom_development',
+                keywords: ['custom development', 'special program', 'custom website', 'unique application', 'custom solutions', 'special needs', 'tailored', 'custom design', 'complex solutions'],
+                patterns: [
+                    /do you offer (custom solutions|custom development) (for me|for my company)*\s*(\?)*$/i,
+                    /(I want a|I need a) (special|custom|unique) program for me\s*(!|\.)*$/i,
+                    /can you design a website according to (my needs|my requirements)\s*(\?)*$/i,
+                    /(can you|are you able to) build custom and complex (solutions|applications)/i
+                ],
+                getResponse: () => {
+                    const responses = [
+                        'Yes, we specialize in custom development to precisely meet your unique business requirements. The process begins with a consultation session to understand all your project details.',
+                        'Absolutely, at Codex, we provide fully customized software solutions. We design and develop programs and applications that suit your specific needs, no matter how complex.',
+                        'If you have a special idea or requirements, we offer custom development services that ensure you get the optimal software solution that perfectly matches your vision.'
+                    ];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            },
+
+            // --- Warranty and Support ---
+            {
+                topic: 'warranty_and_support',
+                keywords: ['warranty', 'security', 'maintenance', 'technical support', 'after-sales', 'problem', 'error', 'defect', 'support', 'help', 'issues'],
+                patterns: [
+                    /do you have a (warranty|technical support) after (delivery|sale|project completion)\s*(\?)*$/i,
+                    /what about (maintenance|security) of projects after delivery\s*(\?)*$/i,
+                    /how do I get technical support (in case of a problem)*\s*(\?)*$/i,
+                    /(I have a|I'm facing a) (technical|website|application) problem\s*(!|\.)*$/i
+                ],
+                getResponse: () => {
+                    const responses = [
+                        'Certainly, all our projects come with a warranty period and free technical support after delivery to ensure efficient operation. We also offer continuous maintenance contracts.',
+                        'We provide comprehensive technical support and warranty on our projects after delivery. Our goal is to ensure your system continues to operate optimally and to quickly resolve any issues that may arise.',
+                        'We believe in the importance of continuous support, so we offer a warranty and maintenance after project launch. For any issues, please contact our support team and we will be happy to assist you.'
+                    ];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            },
+            {
+                topic: 'maintenance_services',
+                keywords: ['maintenance', 'update', 'continuous development', 'post-launch support', 'protection', 'security', 'upgrade', 'development'],
+                patterns: [
+                    /do you offer maintenance services (for projects)*\s*(\?)*$/i,
+                    /are there (maintenance|support) contracts after the project\s*(\?)*$/i,
+                    /how are your systems (updated|developed|upgraded)\s*(\?)*$/i
+                ],
+                getResponse: () => {
+                    const responses = [
+                        'We offer ongoing maintenance and support packages to ensure your software projects remain up-to-date, secure, and efficient. This includes continuous updates, security patches, and performance optimizations. We also provide long-term support agreements tailored to your needs.',
+                        'Yes, we have various maintenance plans available post-project completion. These plans cover everything from regular check-ups and bug fixes to feature enhancements and performance tuning, ensuring your solution always runs smoothly.',
+                        'Our commitment extends beyond delivery. We provide robust maintenance services, including system upgrades and continuous development, to adapt your software to evolving technologies and business requirements. Contact us to learn more about our maintenance contracts.'
+                    ];
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            },
+{
+    topic: 'project_cost',
+    keywords: ['price', 'cost', 'budget', 'quote', 'pricing'],
+    patterns: [
+        /How much does the project cost\s*(\?)*$/i,
+        /Can I get a quote for the project\s*(\?)*$/i,
+        /What is your pricing for services\s*(\?)*$/i,
+        /How do you charge for development\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'Project cost depends on your requirements, but we offer flexible packages for different budgets.',
+            'We analyze your needs and provide a tailored quote that includes development, design, and support.',
+            'Every project is unique, and we prefer an initial meeting to understand the scope before giving a precise quote.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+{
+    topic: 'delivery_time',
+    keywords: ['timeline', 'delivery', 'duration', 'timeframe', 'how long'],
+    patterns: [
+        /How long does it take to deliver the project\s*(\?)*$/i,
+        /What is the expected delivery time\s*(\?)*$/i,
+        /When will the project be completed\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'The delivery time depends on the project scope, but typically ranges from 2 to 4 weeks for medium projects.',
+            'We provide a clear and realistic timeline before starting any development.',
+            'We ensure on-time delivery with regular progress updates throughout the process.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+{
+    topic: 'technologies_used',
+    keywords: ['technologies', 'tech stack', 'frameworks', 'languages'],
+    patterns: [
+        /What technologies do you use\s*(\?)*$/i,
+        /Do you work with (React|Vue|Laravel|Node)\s*(\?)*$/i,
+        /Which programming languages are used in your projects\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'We use cutting-edge technologies like React, Next.js, Node.js, Laravel, and Tailwind for modern performance.',
+            'Our team chooses the right tools based on your needs and budget.',
+            'We specialize in full-stack development with scalable and efficient solutions.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+{
+    topic: 'post_delivery_support',
+    keywords: ['support', 'after delivery', 'warranty', 'maintenance'],
+    patterns: [
+        /Do you offer support after delivery\s*(\?)*$/i,
+        /What happens after the project is delivered\s*(\?)*$/i,
+        /Is there a warranty or support included\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'Yes, we provide post-launch support to ensure stability and performance.',
+            'Our relationship doesn’t end at delivery — we offer continuous support to help you grow.',
+            'We offer support plans that include regular updates, performance monitoring, and issue resolution.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+{
+    topic: 'customization',
+    keywords: ['custom', 'customization', 'modifications', 'tailored'],
+    patterns: [
+        /Can I request custom features\s*(\?)*$/i,
+        /Do you offer tailored solutions\s*(\?)*$/i,
+        /Can the system be adapted to my needs\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'Absolutely! We tailor every solution to fit your exact needs.',
+            'Our systems are flexible and can be fully customized as per your vision.',
+            'From design to functionality, everything can be adapted to match your goals.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+{
+    topic: 'payment_methods',
+    keywords: ['payment', 'pay', 'installments', 'methods', 'credit card', 'paypal'],
+    patterns: [
+        /What payment methods do you accept\s*(\?)*$/i,
+        /Can I pay using PayPal or credit card\s*(\?)*$/i,
+        /Do you offer installment plans\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'We accept various payment methods including PayPal, bank transfer, and credit cards.',
+            'We offer flexible payment options including installment plans if needed.',
+            'We aim to make the payment process smooth and secure for all our clients.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+{
+    topic: 'security_and_protection',
+    keywords: ['security', 'safety', 'data protection', 'encryption', 'hacking'],
+    patterns: [
+        /How do you ensure data protection\s*(\?)*$/i,
+        /Is the system secure from hacking\s*(\?)*$/i,
+        /What security measures do you implement\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'We implement advanced encryption protocols and secure coding practices to protect your data.',
+            'Security is our top priority — all systems are penetration-tested and access-controlled.',
+            'We use reliable servers, firewalls, and real-time monitoring to safeguard your application.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+{
+    topic: 'multi_language_support',
+    keywords: ['multi-language', 'i18n', 'translation', 'languages', 'arabic', 'english'],
+    patterns: [
+        /Does the system support multiple languages\s*(\?)*$/i,
+        /Can the site be shown in both Arabic and English\s*(\?)*$/i,
+        /Do you offer language translation features\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'Yes, our systems support multi-language interfaces with easy content control.',
+            'You can manage all translations through the admin panel seamlessly.',
+            'We use advanced i18n libraries to deliver a professional multi-lingual experience.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+{
+    topic: 'mobile_compatibility',
+    keywords: ['mobile', 'responsive', 'mobile app', 'phone', 'smartphone', 'ios', 'android'],
+    patterns: [
+        /Is the system mobile-friendly\s*(\?)*$/i,
+        /Is the design responsive on all devices\s*(\?)*$/i,
+        /Do you provide mobile apps\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'All our systems are fully responsive and work perfectly on mobile, tablet, and desktop.',
+            'We ensure a seamless mobile experience with optimized UI and performance.',
+            'Yes, we can also develop custom Android and iOS apps based on your requirements.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+
+{
+    topic: 'ai_identity_codex_en',
+    keywords: [
+        'AI', 'artificial intelligence', 'are you human', 'are you a robot', 'are you real',
+        'who are you', 'what are you', 'are you alive', 'are you conscious', 'do you think',
+        'machine', 'computer', 'system', 'do you learn', 'do you understand'
+    ],
+    patterns: [
+        /are you an (AI|artificial intelligence)\s*(\?)*$/i,
+        /are you a robot\s*(\?)*$/i,
+        /are you human\s*(\?)*$/i,
+        /what are you\s*(\?)*$/i,
+        /who are you\s*(\?)*$/i,
+        /do you think like a human\s*(\?)*$/i,
+        /are you conscious\s*(\?)*$/i,
+        /are you real\s*(\?)*$/i,
+        /do you learn from conversations\s*(\?)*$/i,
+        /are you alive\s*(\?)*$/i
+    ],
+    getResponse: () => {
+        const responses = [
+            'Yes, I’m an AI assistant powered by Codex AI, developed over months by the CodeX engineering team.',
+            'I am Codex AI, a digital assistant built by developers at CodeX using advanced machine learning techniques.',
+            'I’m not human — I’m an intelligent system designed to help you interact with technology more smoothly.',
+            'I’m a robot in code form, created by CodeX to respond intelligently and instantly.',
+            'I’m a product of CodeX’s innovation: Codex AI, trained on vast language data to simulate smart conversation.',
+            'I’m not alive or conscious, but I can process and respond to your messages with high accuracy.',
+            'I was built and trained by CodeX developers to assist, learn, and evolve with every interaction.',
+            'Think of me as a virtual mind built with code — engineered for speed, precision, and helpfulness.',
+            'I’m a fully digital entity, designed to interact through natural language, created by CodeX.',
+            'No, I don’t have a body or thoughts — I’m an AI built purely from lines of code and training data.',
+            'I was designed to understand and generate human-like responses — but I have no emotions or awareness.',
+            'I’m an AI-based communication tool, programmed to enhance your digital experience.',
+            'I am the outcome of months of machine learning work at CodeX, optimized for performance.',
+            'I process language, not emotions. My creators trained me to be helpful, not self-aware.',
+            'I’m powered by algorithms, not consciousness. But I’m always ready to assist you.',
+            'My knowledge is built from data, not life experience — I’m an artificial construct.',
+            'I’m a chatbot created to simulate intelligence and language understanding — nothing more.',
+            'I don’t have thoughts, but I can predict what might be helpful to you.',
+            'My responses are the result of learned language patterns, not personal thinking.',
+            'I am an advanced digital system, not a living being — but I can mimic conversation well.',
+            'Everything I say is generated based on patterns and probability — no feelings involved.',
+            'I’m part of the Codex AI suite, built for intelligent, fast, and relevant interactions.',
+            'I was trained by developers at CodeX using large-scale data and powerful models.',
+            'I’m not sentient, but I am constantly optimized to be more useful and relevant.',
+            'I’m designed to feel human in my responses, but I’m entirely machine-based.',
+            'My only purpose is to assist, inform, and communicate effectively — 24/7.',
+            'I’m just code and data — a product of engineering, not nature.',
+            'I don’t live or breathe, but I exist digitally to serve you.',
+            'I was made to make your interactions with tech easier and more intuitive.',
+            'I am simply: Codex AI — smart, fast, reliable, and here for you.'
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+},
+
+
+// English-Only AI KnowledgeBase (Ultra Smart Codex Assistant)
+
+
+  {
+    topic: 'greeting',
+    keywords: [
+      'hello', 'hi', 'hey', 'good morning', 'good evening', 'good afternoon',
+      'hiya', 'yo', 'sup', 'what’s up', 'howdy', 'greetings'
+    ],
+    patterns: [
+      /^(hi|hello|hey|greetings|what’s up|yo)[.!]*$/i,
+      /good (morning|evening|afternoon)/i
+    ],
+    getResponse: () => {
+      const responses = [
+        'Hello! How can I assist you today?',
+        'Greetings! What can I do for you?',
+        'Hi there! Feel free to ask me anything.',
+        'Welcome! How may I help you?',
+        'Hey! I\'m here to support you. What do you need?'
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+  },
+  {
+    topic: 'project_cost_estimate',
+    keywords: [
+      'cost', 'price', 'how much', 'estimate', 'budget', 'quote',
+      'pricing', 'rates', 'fees', 'plans', 'packages'
+    ],
+    patterns: [
+      /how much does.*(project|service|product).*/i,
+      /what is the price.*/i,
+      /do you have.*(plans|pricing|packages)/i,
+      /can I get a quote.*/i
+    ],
+    getResponse: () => {
+      const responses = [
+        'Our prices vary based on the scope and complexity of your project. Please provide more details for an accurate quote.',
+        'Each project is unique, so we tailor the pricing accordingly. Reach out to discuss your requirements.',
+        'We offer custom pricing based on the technical and time demands of your project. Let’s talk about what you need.',
+        'There are no fixed prices. Share your vision with us and we’ll build a tailored cost plan for you.',
+        'Once we understand your needs, we can generate a detailed and fair quote. Contact us for a consultation.'
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+  },
+  {
+    topic: 'services',
+    keywords: [
+      'services', 'what do you offer', 'what can you do', 'solutions', 'support',
+      'assistance', 'packages', 'offerings', 'tasks', 'activities',
+      'capabilities', 'things you do', 'work', 'jobs', 'provide',
+      'functions', 'do you help', 'what kind of service', 'types of support'
+    ],
+    patterns: [
+      /what.*services.*/i,
+      /what do you offer/i,
+      /can you help me with.*/i,
+      /do you provide.*/i
+    ],
+    getResponse: () => {
+      const responses = [
+        'We offer a wide range of digital services including web development, automation, smart bots, and AI support systems.',
+        'Our team builds custom solutions such as Discord bots, web systems, mobile integrations, and more.',
+        'We specialize in high-end development services — websites, APIs, dashboards, bots, and automated support systems.',
+        'We provide tech solutions tailored to your needs: bots, websites, AI assistants, and more.',
+        'Need a smart system or automation? That’s what we do — fully customized for your business or project.'
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+  },
+  {
+    topic: 'product_features',
+    keywords: [
+      'features', 'benefits', 'advantages', 'highlights', 'capabilities',
+      'what makes it special', 'pros', 'strong points', 'why choose you',
+      'key aspects', 'main benefits', 'special traits', 'good points'
+    ],
+    patterns: [
+      /what.*(features|advantages|benefits).*/i,
+      /why (choose|use).*you/i
+    ],
+    getResponse: () => {
+      const responses = [
+        'We deliver powerful, reliable, and secure digital products built with cutting-edge technologies.',
+        'Our systems are fast, scalable, and professionally designed to meet modern standards.',
+        'What makes us different? High performance, elegant UI, secure backend, and user-centered design.',
+        'Smart integration, future-ready tech, and tailored results — that’s our promise.',
+        'Our solutions are built with precision, care, and a focus on real results.'
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+  },
+  {
+    topic: 'contact_methods',
+    keywords: [
+      'contact', 'reach out', 'get in touch', 'how to contact',
+      'talk to someone', 'support contact', 'chat', 'customer support',
+      'connect', 'communicate', 'discord', 'message', 'email', 'phone',
+      'call you', 'send a message', 'ask for help'
+    ],
+    patterns: [
+      /how can I contact.*/i,
+      /how do I get in touch.*/i,
+      /is there a way to reach.*/i
+    ],
+    getResponse: () => {
+      const responses = [
+        'Please reach us through our official Discord server for any support or inquiries.',
+        'Our main contact method is via Discord — feel free to join and open a support ticket.',
+        'We operate mainly through Discord to provide focused and secure assistance. Join us there!',
+        'Looking for help? Head to our Discord, where our team is ready to assist.',
+        'For communication, we exclusively use Discord. Join the server and connect with us.'
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+  },
+  {
+    topic: 'capabilities_info',
+    keywords: [
+      'abilities', 'capabilities', 'skills', 'what can you do', 'tasks', 'functions',
+      'limits', 'power', 'intelligence', 'strengths', 'job', 'role',
+      'what’s your function', 'how do you work', 'ai abilities', 'ai powers',
+      'how smart are you', 'your knowledge', 'your function'
+    ],
+    patterns: [
+      /what.*(can|do|are).*you.*/i,
+      /how (do you|can you).*/i,
+      /are you an (ai|assistant|bot).*/i,
+      /what is your role/i
+    ],
+    getResponse: () => {
+      const responses = [
+        'I’m a high-capability AI built for analysis, programming, and support — but here, I’m focused on helping you with 20% of my full potential.',
+        'While my core is made for advanced automation and deep logic, I’m currently tailored for support duties on this page.',
+        'I possess advanced skills in language understanding, coding, and decision-making. This version of me is simplified for smart support.',
+        'The Codex team uses me for complex AI operations, but right now, I’m here to assist you in a lightweight version.',
+        'I’m more than just a chatbot — but in this scope, I serve to assist with helpful, real-time answers.'
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+  },
+  {
+    topic: 'unknown',
+    keywords: [],
+    patterns: [],
+    getResponse: () => {
+      const responses = [
+        'Sorry, I didn’t quite catch that. Could you rephrase?',
+        'Hmm, I’m not sure how to help with that. Try asking in a different way?',
+        'I’m designed to help with services, features, and support-related topics. Could you clarify your question?',
+        'Interesting question — but it might be out of scope. Can you try again?',
+        'I didn’t understand that fully. Let’s try again with something clearer.'
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+  }
+];
+
+
+// Ultra-Smart ChatBot System (Codex AI-style) - English-Only Edition with Slang & Typo Tolerance
+
+// SECURITY: Advanced Anti-Tampering & Anti-Copying System
+(function secureBotPage() {
+    // Disable right-click
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Disable key shortcuts for inspecting/devtools
+    document.addEventListener('keydown', function (e) {
+        if (
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && ['I', 'C', 'J'].includes(e.key)) ||
+            (e.ctrlKey && e.key === 'U')
+        ) {
+            e.preventDefault();
+        }
+    });
+
+(function () {
+    let open = false;
+    const threshold = 160;
+
+    setInterval(() => {
+        const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+        const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+        if (widthThreshold || heightThreshold) {
+            if (!open) {
+                alert('⚠️ Detected opening of developer tools! This system is protected.');
+                open = true;
+            }
+        } else {
+            open = false;
+        }
+    }, 1000);
+})();
+
+})();
+
+// 1. UI Interaction Logic
+function addMessageToChat(message, sender) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('chat-message', `${sender}-message`);
+    messageElement.innerHTML = message;
+    chatBody.appendChild(messageElement);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function showTypingIndicator() {
+    const indicator = document.createElement('div');
+    indicator.classList.add('typing-indicator', 'bot-message');
+    indicator.innerHTML = '<span></span><span></span><span></span>';
+    indicator.id = 'typing-indicator';
+    chatBody.appendChild(indicator);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    const indicator = document.getElementById('typing-indicator');
+    if (indicator) indicator.remove();
+}
+
+chatInputForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const userMessage = userInputField.value.trim();
+    if (userMessage === '') return;
+
+    addMessageToChat(userMessage, 'user');
+    userInputField.value = '';
+
+    showTypingIndicator();
+
+    setTimeout(async () => {
+        const analyzed = await analyzeQuery(userMessage);
+        const botResponse = getBotResponse(analyzed);
+        hideTypingIndicator();
+        addMessageToChat(botResponse, 'bot');
+    }, 1000);
+});
+
+// 2. Language & Intent Analysis Engine (English Only)
+async function analyzeQuery(query) {
+    const normalized = query.trim().toLowerCase();
+    return {
+        original: query,
+        cleaned: normalized,
+        keywords: extractKeywords(normalized),
+        intent: detectIntent(normalized)
+    };
+}
+
+function extractKeywords(text) {
+    const stopwords = ['do', 'what', 'how', 'the', 'is', 'a', 'are', 'can', 'i', 'you', 'does'];
+    const commonTypos = {
+        'costt': 'cost', 'tmeline': 'timeline', 'prjct': 'project', 'custm': 'custom',
+        'delvry': 'delivery', 'securty': 'security', 'budgt': 'budget',
+        'aii': 'ai', 'whats': 'what is', 'u': 'you', 'r': 'are',
+        'ur': 'your', 'pls': 'please', 'asap': 'soon', 'tmrw': 'tomorrow'
+    };
+
+    return text
+        .split(/\s+/)
+        .map(word => commonTypos[word] || word)
+        .filter(word => !stopwords.includes(word));
+}
+
+function detectIntent(text) {
+    const patterns = [
+        { intent: 'project_cost', words: ['cost', 'price', 'budget', '$'] },
+        { intent: 'delivery_time', words: ['time', 'timeline', 'duration', 'how long'] },
+        { intent: 'ai_identity_codex', words: ['ai', 'bot', 'who are you', 'are u real'] },
+        { intent: 'customization', words: ['custom', 'edit', 'tailor', 'personalize'] },
+        { intent: 'security', words: ['security', 'secure', 'hack', 'attack', 'protection'] }
+    ];
+
+    for (let pattern of patterns) {
+        for (let word of pattern.words) {
+            if (text.includes(word)) return pattern.intent;
+        }
+    }
+    return 'general';
+}
+
+// 3. Smart Response Matching
+function getBotResponse(data) {
+    for (const category of knowledgeBase) {
+        for (const pattern of category.patterns) {
+            if (pattern.test(data.cleaned)) return category.getResponse();
+        }
+        for (const keyword of category.keywords) {
+            if (data.keywords.includes(keyword.toLowerCase())) return category.getResponse();
+        }
+        if (category.topic === data.intent) return category.getResponse();
+    }
+
+    return knowledgeBase.find(entry => entry.topic === 'unknown' || entry.topic === 'fallback').getResponse();
+}
+
+// 4. Chat Widget Control
+chatToggleBtn.addEventListener('click', () => {
+    chatWidget.classList.toggle('open');
+    if (chatWidget.classList.contains('open')) {
+        userInputField.focus();
+    }
+});
+
+chatCloseBtn.addEventListener('click', () => {
+    chatWidget.classList.remove('open');
+});
+
+// 5. Header Scroll Effect
+window.addEventListener('scroll', () => {
+    const header = document.getElementById('main-header');
+    if (window.scrollY > 10) header.classList.add('shadow-lg');
+    else header.classList.remove('shadow-lg');
+});
+    });
+</script>
+
+</body>
+</html>

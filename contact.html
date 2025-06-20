@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeX | Contact Us</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'], // Discord-like font
+                    },
+                    colors: {
+                        'light-beige': '#FDFBF5',
+                        'sky-blue': {
+                            'DEFAULT': '#38bdf8', // light sky blue
+                            'dark': '#0ea5e9',   // darker for hover
+                        },
+                        // Discord-like colors
+                        'discord-dark-bg': '#2C2F33',
+                        'discord-mid-dark': '#23272A',
+                        'discord-light-grey': '#99AAB5',
+                        'discord-purple': '#7289DA',
+                        'discord-green': '#43B581',
+                        'discord-red': '#F04747',
+                        'discord-text': '#DCDDDE',
+                        'discord-channel-bg': '#36393F',
+                        'discord-channel-hover': '#4F545C',
+                        'discord-mention-blue': '#5865F2',
+                        'discord-blue-bold': '#00B0F4', /* A blue often seen in Discord for names */
+                        'discord-member-color': '#4CAF50', /* Example for a member color, could vary */
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* To apply the font globally */
+        body {
+            font-family: 'cairo', sans-serif;
+            background-color: #FDFBF5; /* Light beige color */
+            color: #1a1a1a; /* Black text color */
+            scroll-behavior: smooth;
+        }
+
+        /* Override for Discord-like section */
+        .discord-section-font {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom scrollbar for Discord-like feel */
+        .discord-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .discord-scrollbar::-webkit-scrollbar-track {
+            background: #202225;
+        }
+        .discord-scrollbar::-webkit-scrollbar-thumb {
+            background: #4F545C;
+            border-radius: 4px;
+        }
+        .discord-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #6A707A;
+        }
+
+        /* Discord message styling */
+        .discord-message {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-right: 1rem; /* Adjust for LTR */
+            padding-left: 0.5rem; /* Adjust for LTR */
+        }
+        .discord-message:hover {
+            background-color: rgba(32, 34, 37, 0.3); /* Slightly darker on hover */
+        }
+        .discord-message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-right: 1rem; /* Adjust for LTR */
+            margin-left: 0;
+        }
+        .discord-message-content {
+            flex-grow: 1;
+        }
+        .discord-message-header {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 0.25rem;
+        }
+        .discord-message-username {
+            font-weight: 600;
+            margin-right: 0.5rem; /* Adjust for LTR */
+            margin-left: 0;
+        }
+        .discord-message-timestamp {
+            color: #72767D;
+            font-size: 0.75rem;
+        }
+        .discord-message-text {
+            color: #DCDDDE;
+            line-height: 1.375;
+        }
+
+        /* Channel active state */
+        .channel-active {
+            background-color: #36393F !important; /* Deeper background for active channel */
+            color: #DCDDDE !important;
+        }
+
+        /* Basic animation for channel switch */
+        .channel-content-transition {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .channel-content-transition.active {
+            opacity: 1;
+        }
+
+        /* Smooth loading effect */
+        @keyframes fade-in-down {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-down {
+            animation: fade-in-down 0.6s ease-out both;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-light-beige/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 transition-all duration-300 ease-in-out" id="main-header">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center animate-fade-in-down">
+            <a href="index.html" class="relative text-2xl font-bold text-gray-800 transition-transform duration-300 hover:scale-105 group">
+                Codex
+                <span class="absolute -bottom-1 left-0 w-0 h-1 bg-sky-400 group-hover:w-full transition-all duration-500 rounded-full"></span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">Home</a>
+                <a href="shop.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">Our Products</a>
+                <a href="about.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">About Us</a>
+                <a href="contact.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">Contact Us</a>
+            </nav>
+
+            <a href="support.html" class="hidden md:block bg-sky-blue text-white font-bold py-2 px-5 rounded-lg shadow-md hover:bg-sky-blue-dark transition-all duration-300 hover:scale-105 hover:shadow-lg hover:animate-pulse">
+                Technical Support
+            </a>
+
+            <button class="md:hidden text-gray-700 focus:outline-none transition-transform duration-300 hover:rotate-90">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="min-h-screen bg-discord-mid-dark py-12 md:py-16 discord-section-font">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-discord-text text-center mb-12">Contact Us via Discord</h1>
+            
+            <div class="flex flex-col md:flex-row bg-discord-dark-bg rounded-lg shadow-2xl overflow-hidden max-w-5xl mx-auto border border-gray-700">
+
+                <div class="w-full md:w-1/4 bg-discord-mid-dark p-4 border-r border-gray-700 md:border-r-0 md:border-l flex flex-col items-start">
+                    <div class="flex items-center mb-6 w-full">
+                        <img src="dis.png" alt="Discord Icon" class="w-8 h-8 mr-3">
+                        <h2 class="text-white text-lg font-semibold truncate">Codex</h2>
+                    </div>
+
+                    <div class="w-full">
+                        <h3 class="text-discord-light-grey text-xs font-semibold uppercase mb-2">Text Channels</h3>
+                        <a href="#" id="contact-channel-link" class="channel-link flex items-center py-2 px-3 rounded-md text-discord-text bg-discord-channel-bg hover:bg-discord-channel-hover transition-colors mb-2 channel-active">
+                            <span class="material-icons text-xl mr-2">tag</span>
+                            <span class="text-base font-medium">contact-us</span>
+                        </a>
+                        <a href="#" id="ticket-channel-link" class="channel-link flex items-center py-2 px-3 rounded-md text-discord-light-grey hover:bg-discord-channel-hover transition-colors">
+                            <span class="material-icons text-xl mr-2">receipt_long</span>
+                            <span class="text-base font-medium">purchase-ticket</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-3/4 bg-discord-dark-bg p-6 flex flex-col justify-between discord-scrollbar">
+                    <div class="flex items-center mb-6 pb-4 border-b border-gray-700">
+                        <span id="channel-header-icon" class="material-icons text-discord-light-grey text-3xl mr-3">tag</span>
+                        <h2 id="channel-header-name" class="text-discord-text text-2xl font-semibold">contact-us</h2>
+                    </div>
+
+                    <div id="channel-content" class="flex-grow overflow-y-auto pl-3 discord-scrollbar">
+                        <div id="contact-channel-content" class="channel-content-transition active">
+                            <div class="discord-message">
+                                <img src="avatar.png" alt="Codex Support Avatar" class="discord-message-avatar">
+                                <div class="discord-message-content">
+                                    <div class="discord-message-header">
+                                        <span class="discord-message-username text-discord-purple">Codex Support</span>
+                                        <span class="discord-message-timestamp"> Today at 12:40 AM </span>
+                                    </div>
+                                    <div class="discord-message-text leading-relaxed">
+                                        Welcome to the <strong class="text-discord-mention-blue">#contact-us</strong> channel! 👋
+                                        <br><br>
+                                        To contact administration regarding <strong class="text-discord-green">product purchase</strong> or any other inquiry, please open a new ticket. This method ensures that your request reaches the specialized team directly and is handled as quickly and efficiently as possible.
+                                        <br><br>
+                                        <strong class="font-bold text-discord-blue-bold">How to open a ticket?</strong>
+                                        <ol class="list-decimal list-inside mt-2 space-y-1">
+                                            <li>Go to the <strong class="text-discord-green">#purchase-ticket</strong> channel in our server by clicking on it in the sidebar.</li>
+                                            <li>In that channel, you will find instructions to open your own ticket.</li>
+                                            <li>A dedicated channel will be created for you to communicate directly with the sales and support team.</li>
+                                        </ol>
+                                        <br>
+                                        <strong class="font-bold text-discord-red">Alert:</strong> This channel is for general information only. Please use the ticketing system for all product or service related inquiries to ensure a quick and organized response.
+                                        <br><br>
+                                        We are here to serve you!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="ticket-channel-content" class="channel-content-transition hidden">
+                            <div class="discord-message">
+                                <img src="user.png" alt="User Avatar" class="discord-message-avatar">
+                                <div class="discord-message-content">
+                                    <div class="discord-message-header">
+                                        <span class="discord-message-username text-discord-blue-bold">new-customer</span>
+                                        <span class="discord-message-timestamp"> Today at 12:45 AM </span>
+                                    </div>
+                                    <div class="discord-message-text">
+                                        Peace, mercy, and blessings of God be upon you. I would like to purchase one of the products.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="discord-message">
+                                <img src="avatar.png" alt="Support Team Avatar" class="discord-message-avatar">
+                                <div class="discord-message-content">
+                                    <div class="discord-message-header">
+                                        <span class="discord-message-username text-discord-green">Support Team</span>
+                                        <span class="discord-message-timestamp"> Today at 12:46 AM </span>
+                                    </div>
+                                    <div class="discord-message-text">
+                                        Peace, mercy, and blessings of God be upon you. Codex customer service is with you. How can I help you?
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="discord-message">
+                                <img src="user.png" alt="User Avatar" class="discord-message-avatar">
+                                <div class="discord-message-content">
+                                    <div class="discord-message-header">
+                                        <span class="discord-message-username text-discord-blue-bold">new-customer</span>
+                                        <span class="discord-message-timestamp"> Today at 12:48 AM </span>
+                                    </div>
+                                    <div class="discord-message-text">
+                                        I would like details about the server management bot.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <div class="bg-discord-channel-bg rounded-lg p-3 flex items-center">
+                            <span class="material-icons text-discord-light-grey mr-3">add_circle</span>
+                            <input type="text" placeholder="Messages in this channel are paused." class="flex-grow bg-transparent text-discord-text outline-none placeholder-discord-light-grey text-lg pl-3" disabled>
+                        </div>
+                        <p class="text-discord-light-grey text-sm text-center mt-2">
+                            To interact, please join our Discord server and use the ticketing system.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://discord.gg/QQAEpsnKZF" target="_blank" class="inline-block bg-discord-purple text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:bg-discord-mention-blue transition-colors duration-300 transform hover:scale-105">
+                    Join our Discord server now!
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-950 text-white border-t border-gray-800">
+        <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+            
+            <div class="text-sm text-gray-400">
+                At <span class="font-semibold text-white">Codex</span>, we believe that technology should be simple and stunning at the same time.
+            </div>
+
+            <div class="flex justify-center md:justify-center space-x-6">
+<a href="https://www.youtube.com/@CodeX-dev-eazy" class="hover:text-red-600 transition" aria-label="YouTube" target="_blank">
+    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+        <path d="M23.498 6.186a2.93 2.93 0 0 0-2.057-2.066C19.57 3.5 12 3.5 12 3.5s-7.57 0-9.441.62A2.93 2.93 0 0 0 .502 6.186C0 8.066 0 12 0 12s0 3.934.502 5.814a2.93 2.93 0 0 0 2.057 2.066C4.43 20.5 12 20.5 12 20.5s7.57 0 9.441-.62a2.93 2.93 0 0 0 2.057-2.066C24 15.934 24 12 24 12s0-3.934-.502-5.814zM9.75 15.018V8.982L15.545 12 9.75 15.018z"/>
+    </svg>
+</a>
+
+<a href="https://discord.gg/QQAEpsnKZF" class="hover:text-indigo-500 transition" aria-label="Discord" target="_blank">
+    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+        <path d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.078.037c-.211.375-.444.864-.608 1.249a18.365 18.365 0 00-5.493 0 12.06 12.06 0 00-.617-1.249.077.077 0 00-.078-.037 19.736 19.736 0 00-4.885 1.515.07.07 0 00-.033.027C.533 9.045-.32 13.579.099 18.057a.082.082 0 00.031.056 19.9 19.9 0 005.993 3.058.077.077 0 00.084-.027c.46-.63.873-1.295 1.226-1.989a.076.076 0 00-.041-.106 13.276 13.276 0 01-1.886-.902.077.077 0 01-.008-.127c.126-.094.252-.192.374-.291a.074.074 0 01.077-.01c3.928 1.795 8.18 1.795 12.061 0a.073.073 0 01.078.009c.123.099.248.198.375.292a.076.076 0 01-.006.127 12.387 12.387 0 01-1.887.901.076.076 0 00-.04.107c.36.693.773 1.358 1.225 1.988a.075.075 0 00.084.028 19.87 19.87 0 006.002-3.057.078.078 0 00.03-.057c.5-5.177-.838-9.673-3.548-13.66a.062.062 0 00-.03-.027zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.094 2.157 2.418 0 1.334-.955 2.419-2.157 2.419zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.094 2.157 2.418 0 1.334-.947 2.419-2.157 2.419z"/>
+    </svg>
+</a>
+
+
+
+<a href="https://x.com/CodeXdeveazy" class="text-white hover:text-gray-300 transition" aria-label="X" target="_blank">
+    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+        <path d="M21.543 3H17.7l-5.3 6.867L6.257 3H2l7.617 10.066L2 21h3.843l5.57-7.207L17.7 21H22l-7.905-10.34L21.543 3z"/>
+    </svg>
+</a>
+
+
+
+            </div>
+
+            <div class="text-sm text-gray-500">
+                All rights reserved © Codex 2025
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactChannelLink = document.getElementById('contact-channel-link');
+            const ticketChannelLink = document.getElementById('ticket-channel-link');
+            const contactChannelContent = document.getElementById('contact-channel-content');
+            const ticketChannelContent = document.getElementById('ticket-channel-content');
+            const channelHeaderName = document.getElementById('channel-header-name');
+            const channelHeaderIcon = document.getElementById('channel-header-icon');
+
+            function showChannel(channelId) {
+                // Hide all channel contents
+                document.querySelectorAll('.channel-content-transition').forEach(content => {
+                    content.classList.remove('active');
+                    content.classList.add('hidden');
+                });
+
+                // Deactivate all channel links
+                document.querySelectorAll('.channel-link').forEach(link => {
+                    link.classList.remove('channel-active');
+                });
+
+                // Show the selected channel content with animation
+                const selectedContent = document.getElementById(channelId + '-content');
+                if (selectedContent) {
+                    selectedContent.classList.remove('hidden');
+                    // Trigger reflow to ensure transition
+                    void selectedContent.offsetWidth;
+                    selectedContent.classList.add('active');
+                }
+
+                // Activate the corresponding channel link
+                const selectedLink = document.getElementById(channelId + '-link');
+                if (selectedLink) {
+                    selectedLink.classList.add('channel-active');
+                }
+
+                // Update header
+                if (channelId === 'contact-channel') {
+                    channelHeaderName.textContent = 'contact-us';
+                    channelHeaderIcon.textContent = 'tag'; // Hashtag icon
+                } else if (channelId === 'ticket-channel') {
+                    channelHeaderName.textContent = 'purchase-ticket';
+                    channelHeaderIcon.textContent = 'receipt_long'; // Ticket icon
+                }
+            }
+
+            // Event listeners for channel links
+            contactChannelLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showChannel('contact-channel');
+            });
+
+            ticketChannelLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showChannel('ticket-channel');
+            });
+
+            // Initial load: ensure #contact-us is active
+            showChannel('contact-channel');
+        });
+
+// Prevent right-click
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Prevent element inspection shortcuts
+document.addEventListener('keydown', function(e) {
+    if (
+        e.key === 'F12' ||             // F12
+        (e.ctrlKey && e.shiftKey && e.key === 'I') || // Ctrl+Shift+I
+        (e.ctrlKey && e.shiftKey && e.key === 'C') || // Ctrl+Shift+C
+        (e.ctrlKey && e.shiftKey && e.key === 'J') || // Ctrl+Shift+J
+        (e.ctrlKey && e.key === 'U')          // Ctrl+U (view source)
+    ) {
+        e.preventDefault();
+    }
+});
+
+// Disable selection or dragging
+document.addEventListener('selectstart', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+
+// Disable console.log and inspection from the console
+(function() {
+    const blocked = ['log', 'warn', 'debug', 'info', 'error'];
+    blocked.forEach(method => {
+        console[method] = function() {};
+    });
+})();
+
+// Attempt to prevent opening developer tools
+setInterval(() => {
+    const before = new Date();
+    debugger;
+    const after = new Date();
+    if (after - before > 100) {
+        window.location.href = "about:blank";
+    }
+}, 1000);
+
+// Add shadow on header scroll
+window.addEventListener('scroll', () => {
+    const header = document.getElementById('main-header');
+    if (window.scrollY > 10) {
+        header.classList.add('shadow-lg');
+    } else {
+        header.classList.remove('shadow-lg');
+    }
+});
+    </script>
+
+</body>
+</html>
