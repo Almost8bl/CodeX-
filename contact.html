@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeX | Contact Us</title>
+    <title>تواصل معنا | CodeX </title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <script>
         tailwind.config = {
@@ -48,8 +49,8 @@
         /* To apply the font globally */
         body {
             font-family: 'cairo', sans-serif;
-            background-color: #FDFBF5; /* Light beige color */
-            color: #1a1a1a; /* Black text color */
+            background-color: #FDFBF5; /* لون البيج الفاتح */
+            color: #1a1a1a; /* لون النص الأسود */
             scroll-behavior: smooth;
         }
 
@@ -77,8 +78,8 @@
         .discord-message {
             display: flex;
             margin-bottom: 1rem;
-            padding-right: 1rem; /* Adjust for LTR */
-            padding-left: 0.5rem; /* Adjust for LTR */
+            padding-right: 1rem; /* Adjust for RTL */
+            padding-left: 0.5rem; /* Adjust for RTL */
         }
         .discord-message:hover {
             background-color: rgba(32, 34, 37, 0.3); /* Slightly darker on hover */
@@ -88,8 +89,8 @@
             height: 40px;
             border-radius: 50%;
             flex-shrink: 0;
-            margin-right: 1rem; /* Adjust for LTR */
-            margin-left: 0;
+            margin-left: 1rem; /* Adjust for RTL */
+            margin-right: 0;
         }
         .discord-message-content {
             flex-grow: 1;
@@ -101,8 +102,8 @@
         }
         .discord-message-username {
             font-weight: 600;
-            margin-right: 0.5rem; /* Adjust for LTR */
-            margin-left: 0;
+            margin-left: 0.5rem; /* Adjust for RTL */
+            margin-right: 0;
         }
         .discord-message-timestamp {
             color: #72767D;
@@ -128,7 +129,7 @@
             opacity: 1;
         }
 
-        /* Smooth loading effect */
+        /* مؤثر تحميل ناعم */
         @keyframes fade-in-down {
             0% {
                 opacity: 0;
@@ -142,6 +143,21 @@
         .animate-fade-in-down {
             animation: fade-in-down 0.6s ease-out both;
         }
+
+        /* === NEW ANIMATION FOR MAINTENANCE MESSAGE === */
+        @keyframes show-message-animation {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .animate-message {
+            animation: show-message-animation 0.5s ease-out forwards;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -153,15 +169,15 @@
                 <span class="absolute -bottom-1 left-0 w-0 h-1 bg-sky-400 group-hover:w-full transition-all duration-500 rounded-full"></span>
             </a>
 
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">Home</a>
-                <a href="shop.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">Our Products</a>
-                <a href="about.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">About Us</a>
-                <a href="contact.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">Contact Us</a>
+            <nav class="hidden md:flex items-center space-x-8 space-x-reverse">
+                <a href="index.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">الرئيسية</a>
+                <a href="shop.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">منتجاتنا</a>
+                <a href="about.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">من نحن</a>
+                <a href="contact.html" class="text-gray-600 hover:text-sky-blue transition relative hover:after:w-full after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-sky-blue after:transition-all after:duration-500">تواصل معنا</a>
             </nav>
 
             <a href="support.html" class="hidden md:block bg-sky-blue text-white font-bold py-2 px-5 rounded-lg shadow-md hover:bg-sky-blue-dark transition-all duration-300 hover:scale-105 hover:shadow-lg hover:animate-pulse">
-                Technical Support
+                الدعم الفني
             </a>
 
             <button class="md:hidden text-gray-700 focus:outline-none transition-transform duration-300 hover:rotate-90">
@@ -174,59 +190,59 @@
 
     <main class="min-h-screen bg-discord-mid-dark py-12 md:py-16 discord-section-font">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-discord-text text-center mb-12">Contact Us via Discord</h1>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-discord-text text-center mb-12">تواصل معنا عبر Discord</h1>
             
             <div class="flex flex-col md:flex-row bg-discord-dark-bg rounded-lg shadow-2xl overflow-hidden max-w-5xl mx-auto border border-gray-700">
 
-                <div class="w-full md:w-1/4 bg-discord-mid-dark p-4 border-r border-gray-700 md:border-r-0 md:border-l flex flex-col items-start">
+                <div class="w-full md:w-1/4 bg-discord-mid-dark p-4 border-l border-gray-700 md:border-l-0 md:border-r flex flex-col items-start">
                     <div class="flex items-center mb-6 w-full">
-                        <img src="dis.png" alt="Discord Icon" class="w-8 h-8 mr-3">
-                        <h2 class="text-white text-lg font-semibold truncate">Codex</h2>
+                        <img src="dis.png" alt="Discord Icon" class="w-8 h-8 ml-3">
+                        <h2 class="text-white text-lg font-semibold truncate">Codex </h2>
                     </div>
 
                     <div class="w-full">
-                        <h3 class="text-discord-light-grey text-xs font-semibold uppercase mb-2">Text Channels</h3>
+                        <h3 class="text-discord-light-grey text-xs font-semibold uppercase mb-2">قنوات نصية</h3>
                         <a href="#" id="contact-channel-link" class="channel-link flex items-center py-2 px-3 rounded-md text-discord-text bg-discord-channel-bg hover:bg-discord-channel-hover transition-colors mb-2 channel-active">
-                            <span class="material-icons text-xl mr-2">tag</span>
-                            <span class="text-base font-medium">contact-us</span>
+                            <span class="material-icons text-xl ml-2">tag</span>
+                            <span class="text-base font-medium">تواصل-معنا</span>
                         </a>
                         <a href="#" id="ticket-channel-link" class="channel-link flex items-center py-2 px-3 rounded-md text-discord-light-grey hover:bg-discord-channel-hover transition-colors">
-                            <span class="material-icons text-xl mr-2">receipt_long</span>
-                            <span class="text-base font-medium">purchase-ticket</span>
+                            <span class="material-icons text-xl ml-2">receipt_long</span>
+                            <span class="text-base font-medium">تذكرة-شراء</span>
                         </a>
                     </div>
                 </div>
 
                 <div class="w-full md:w-3/4 bg-discord-dark-bg p-6 flex flex-col justify-between discord-scrollbar">
                     <div class="flex items-center mb-6 pb-4 border-b border-gray-700">
-                        <span id="channel-header-icon" class="material-icons text-discord-light-grey text-3xl mr-3">tag</span>
-                        <h2 id="channel-header-name" class="text-discord-text text-2xl font-semibold">contact-us</h2>
+                        <span id="channel-header-icon" class="material-icons text-discord-light-grey text-3xl ml-3">tag</span>
+                        <h2 id="channel-header-name" class="text-discord-text text-2xl font-semibold">تواصل-معنا</h2>
                     </div>
 
-                    <div id="channel-content" class="flex-grow overflow-y-auto pl-3 discord-scrollbar">
+                    <div id="channel-content" class="flex-grow overflow-y-auto pr-3 discord-scrollbar">
                         <div id="contact-channel-content" class="channel-content-transition active">
                             <div class="discord-message">
                                 <img src="avatar.png" alt="Codex Support Avatar" class="discord-message-avatar">
                                 <div class="discord-message-content">
                                     <div class="discord-message-header">
                                         <span class="discord-message-username text-discord-purple">Codex Support</span>
-                                        <span class="discord-message-timestamp"> Today at 12:40 AM </span>
+                                        <span class="discord-message-timestamp"> اليوم في 12:40 صباحًا </span>
                                     </div>
                                     <div class="discord-message-text leading-relaxed">
-                                        Welcome to the <strong class="text-discord-mention-blue">#contact-us</strong> channel! 👋
+                                        مرحباً بك في قناة <strong class="text-discord-mention-blue">#تواصل-معنا</strong>! 👋
                                         <br><br>
-                                        To contact administration regarding <strong class="text-discord-green">product purchase</strong> or any other inquiry, please open a new ticket. This method ensures that your request reaches the specialized team directly and is handled as quickly and efficiently as possible.
+                                        للتواصل مع الإدارة بخصوص <strong class="text-discord-green">شراء منتج</strong> أو أي استفسار آخر، يُرجى فتح تذكرة جديدة. هذه الطريقة تضمن أن طلبك سيصل للفريق المختص مباشرةً ويتم التعامل معه بأسرع وقت وأكبر فعالية.
                                         <br><br>
-                                        <strong class="font-bold text-discord-blue-bold">How to open a ticket?</strong>
+                                        <strong class="font-bold text-discord-blue-bold">كيف تفتح تذكرة؟</strong>
                                         <ol class="list-decimal list-inside mt-2 space-y-1">
-                                            <li>Go to the <strong class="text-discord-green">#purchase-ticket</strong> channel in our server by clicking on it in the sidebar.</li>
-                                            <li>In that channel, you will find instructions to open your own ticket.</li>
-                                            <li>A dedicated channel will be created for you to communicate directly with the sales and support team.</li>
+                                            <li>انتقل إلى قناة <strong class="text-discord-green">#تذكرة-شراء</strong> في سيرفرنا عبر النقر عليها في الشريط الجانبي.</li>
+                                            <li>في تلك القناة، ستجد التعليمات لفتح تذكرة خاصة بك.</li>
+                                            <li>سيتم إنشاء قناة خاصة بك للتواصل المباشر مع فريق المبيعات والدعم.</li>
                                         </ol>
                                         <br>
-                                        <strong class="font-bold text-discord-red">Alert:</strong> This channel is for general information only. Please use the ticketing system for all product or service related inquiries to ensure a quick and organized response.
+                                        <strong class="font-bold text-discord-red">تنبيه:</strong> هذه القناة مخصصة للمعلومات العامة فقط. يُرجى استخدام نظام التذاكر لجميع الاستفسارات المتعلقة بالمنتجات أو الخدمات لضمان استجابة سريعة ومنظمة.
                                         <br><br>
-                                        We are here to serve you!
+                                        نحن هنا لخدمتك!
                                     </div>
                                 </div>
                             </div>
@@ -237,11 +253,11 @@
                                 <img src="user.png" alt="User Avatar" class="discord-message-avatar">
                                 <div class="discord-message-content">
                                     <div class="discord-message-header">
-                                        <span class="discord-message-username text-discord-blue-bold">new-customer</span>
-                                        <span class="discord-message-timestamp"> Today at 12:45 AM </span>
+                                        <span class="discord-message-username text-discord-blue-bold">عميل-جديد</span>
+                                        <span class="discord-message-timestamp"> اليوم في 12:45 صباحًا </span>
                                     </div>
                                     <div class="discord-message-text">
-                                        Peace, mercy, and blessings of God be upon you. I would like to purchase one of the products.
+                                        السلام عليكم ورحمة الله وبركاته، اود شراء احد المنتجات.
                                     </div>
                                 </div>
                             </div>
@@ -251,10 +267,10 @@
                                 <div class="discord-message-content">
                                     <div class="discord-message-header">
                                         <span class="discord-message-username text-discord-green">Support Team</span>
-                                        <span class="discord-message-timestamp"> Today at 12:46 AM </span>
+                                        <span class="discord-message-timestamp"> اليوم في 12:46 صباحًا </span>
                                     </div>
                                     <div class="discord-message-text">
-                                        Peace, mercy, and blessings of God be upon you. Codex customer service is with you. How can I help you?
+                                        وعليكم السلام ورحمة الله وبركاته، خدمة عملاء Codex مع حضرتك. كيف اقدر اساعدك؟
                                     </div>
                                 </div>
                             </div>
@@ -263,11 +279,11 @@
                                 <img src="user.png" alt="User Avatar" class="discord-message-avatar">
                                 <div class="discord-message-content">
                                     <div class="discord-message-header">
-                                        <span class="discord-message-username text-discord-blue-bold">new-customer</span>
-                                        <span class="discord-message-timestamp"> Today at 12:48 AM </span>
+                                        <span class="discord-message-username text-discord-blue-bold">عميل-جديد</span>
+                                        <span class="discord-message-timestamp"> اليوم في 12:48 صباحًا </span>
                                     </div>
                                     <div class="discord-message-text">
-                                        I would like details about the server management bot.
+                                        ارغب في تفاصيل حول بوت إدارة السيرفرات.
                                     </div>
                                 </div>
                             </div>
@@ -276,32 +292,35 @@
 
                     <div class="mt-8">
                         <div class="bg-discord-channel-bg rounded-lg p-3 flex items-center">
-                            <span class="material-icons text-discord-light-grey mr-3">add_circle</span>
-                            <input type="text" placeholder="Messages in this channel are paused." class="flex-grow bg-transparent text-discord-text outline-none placeholder-discord-light-grey text-lg pl-3" disabled>
+                            <span class="material-icons text-discord-light-grey ml-3">add_circle</span>
+                            <input type="text" placeholder="الرسائل في هذه القناة موقوفة." class="flex-grow bg-transparent text-discord-text outline-none placeholder-discord-light-grey text-lg pr-3" disabled>
                         </div>
                         <p class="text-discord-light-grey text-sm text-center mt-2">
-                            To interact, please join our Discord server and use the ticketing system.
+                            للتفاعل، يُرجى الانضمام إلى سيرفر Discord الخاص بنا واستخدام نظام التذاكر.
                         </p>
                     </div>
                 </div>
             </div>
             
             <div class="text-center mt-12">
-                <a href="https://discord.gg/QQAEpsnKZF" target="_blank" class="inline-block bg-discord-purple text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:bg-discord-mention-blue transition-colors duration-300 transform hover:scale-105">
-                    Join our Discord server now!
+                <a href="" id="join-discord-btn" target="_blank" class="inline-block bg-discord-purple text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:bg-discord-mention-blue transition-colors duration-300 transform hover:scale-105">
+                    انضم إلى سيرفرنا على Discord الآن!
                 </a>
+                <div id="maintenance-message" class="text-red-500 font-bold mt-4 text-center hidden">
+                    عميلنا العزيز, مجتمعنا تحت الصيانة حاليا لا يمكنك الانضمام, شكرا لتفهمك .
+                </div>
             </div>
         </div>
     </main>
 
     <footer class="bg-gray-950 text-white border-t border-gray-800">
-        <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+        <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-right">
             
             <div class="text-sm text-gray-400">
-                At <span class="font-semibold text-white">Codex</span>, we believe that technology should be simple and stunning at the same time.
+                نحن في <span class="font-semibold text-white">Codex</span> نؤمن بأن التقنية يجب أن تكون بسيطة ومبهرة في آنٍ واحد.
             </div>
 
-            <div class="flex justify-center md:justify-center space-x-6">
+            <div class="flex justify-center md:justify-center space-x-6 rtl:space-x-reverse">
 <a href="https://www.youtube.com/@CodeX-dev-eazy" class="hover:text-red-600 transition" aria-label="YouTube" target="_blank">
     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
         <path d="M23.498 6.186a2.93 2.93 0 0 0-2.057-2.066C19.57 3.5 12 3.5 12 3.5s-7.57 0-9.441.62A2.93 2.93 0 0 0 .502 6.186C0 8.066 0 12 0 12s0 3.934.502 5.814a2.93 2.93 0 0 0 2.057 2.066C4.43 20.5 12 20.5 12 20.5s7.57 0 9.441-.62a2.93 2.93 0 0 0 2.057-2.066C24 15.934 24 12 24 12s0-3.934-.502-5.814zM9.75 15.018V8.982L15.545 12 9.75 15.018z"/>
@@ -327,7 +346,7 @@
             </div>
 
             <div class="text-sm text-gray-500">
-                All rights reserved © Codex 2025
+                جميع الحقوق محفوظة © Codex 2025
             </div>
 
         </div>
@@ -371,10 +390,10 @@
 
                 // Update header
                 if (channelId === 'contact-channel') {
-                    channelHeaderName.textContent = 'contact-us';
+                    channelHeaderName.textContent = 'تواصل-معنا';
                     channelHeaderIcon.textContent = 'tag'; // Hashtag icon
                 } else if (channelId === 'ticket-channel') {
-                    channelHeaderName.textContent = 'purchase-ticket';
+                    channelHeaderName.textContent = 'تذكرة-شراء';
                     channelHeaderIcon.textContent = 'receipt_long'; // Ticket icon
                 }
             }
@@ -390,31 +409,48 @@
                 showChannel('ticket-channel');
             });
 
-            // Initial load: ensure #contact-us is active
+            // Initial load: ensure #تواصل-معنا is active
             showChannel('contact-channel');
+
+            
+            // === NEW SCRIPT FOR MAINTENANCE MESSAGE ===
+            const joinDiscordBtn = document.getElementById('join-discord-btn');
+            const maintenanceMessage = document.getElementById('maintenance-message');
+
+            joinDiscordBtn.addEventListener('click', (e) => {
+                // Prevent the link from opening
+                e.preventDefault();
+                
+                // Show the message with an animation
+                if (maintenanceMessage.classList.contains('hidden')) {
+                    maintenanceMessage.classList.remove('hidden');
+                    maintenanceMessage.classList.add('animate-message');
+                }
+            });
         });
 
-// Prevent right-click
+
+// منع كليك يمين
 document.addEventListener('contextmenu', e => e.preventDefault());
 
-// Prevent element inspection shortcuts
+// منع اختصارات فحص العنصر
 document.addEventListener('keydown', function(e) {
     if (
-        e.key === 'F12' ||             // F12
+        e.key === 'F12' ||               // F12
         (e.ctrlKey && e.shiftKey && e.key === 'I') || // Ctrl+Shift+I
         (e.ctrlKey && e.shiftKey && e.key === 'C') || // Ctrl+Shift+C
         (e.ctrlKey && e.shiftKey && e.key === 'J') || // Ctrl+Shift+J
-        (e.ctrlKey && e.key === 'U')          // Ctrl+U (view source)
+        (e.ctrlKey && e.key === 'U')          // Ctrl+U (عرض الكود)
     ) {
         e.preventDefault();
     }
 });
 
-// Disable selection or dragging
+// تعطيل السحب أو التحديد
 document.addEventListener('selectstart', e => e.preventDefault());
 document.addEventListener('dragstart', e => e.preventDefault());
 
-// Disable console.log and inspection from the console
+// تعطيل console.log والتفتيش من الكونسول
 (function() {
     const blocked = ['log', 'warn', 'debug', 'info', 'error'];
     blocked.forEach(method => {
@@ -422,7 +458,7 @@ document.addEventListener('dragstart', e => e.preventDefault());
     });
 })();
 
-// Attempt to prevent opening developer tools
+// محاولة منع فتح أدوات المطور
 setInterval(() => {
     const before = new Date();
     debugger;
@@ -432,7 +468,7 @@ setInterval(() => {
     }
 }, 1000);
 
-// Add shadow on header scroll
+// إضافة ظل عند التمرير للهيدر
 window.addEventListener('scroll', () => {
     const header = document.getElementById('main-header');
     if (window.scrollY > 10) {
